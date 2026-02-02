@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Will You Be My Valentine 💖</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+}
+
+h1, h2 {
+    color: #e91e63;
+    margin-bottom: 10px;
+    font-size: clamp(20px, 5vw, 26px);
+}
+
+p {
+    font-size: clamp(14px, 4vw, 16px);
+}
+
+button {
+    width: 100%;
+    max-width: 220px;
+    padding: 12px;
+    margin: 8px auto;
+    display: block;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.yes { background: #e91e63; color: white; }
+.no { background: #ccc; }
+.back { background: #555; color: white; }
+
+.hidden {
+    display: none;
+}
+
+img {
+    width: 100%;
+    max-width: 260px;
+    border-radius: 15px;
+    margin: 12px auto;
+}
+
+/* ❤️ Beating heart */
+.heartbeat {
+    font-size: clamp(40px, 12vw, 60px);
+    animation: beat 1s infinite;
+    margin: 10px 0;
+}
+
+@keyframes beat {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.15); }
+    40%  { transform: scale(1); }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ❤️ Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -30px;
+    color: red;
+    pointer-events: none;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div id="question">
+        <div class="heartbeat">❤️</div>
+        <h1>Will you be my Valentine?</h1>
+        <button class="yes" onclick="yes()">Yes 💖</button>
+        <button class="no" onclick="no()">No 😜</button>
+    </div>
+
+    <div id="yesBox" class="hidden">
+        <div class="heartbeat">❤️</div>
+        <h2>You said YES ❤️</h2>
+        <img src="IMG_5665.jpeg" alt="My Photo">
+        <p>You made my day 💕</p>
+        <button class="back" onclick="back()">⬅ Back</button>
+    </div>
+
+    <div id="noBox" class="hidden">
+        <div class="heartbeat">❤️</div>
+        <h2>Try again 😄</h2>
+        <button class="back" onclick="back()">⬅ Back</button>
+    </div>
+
+</div>
+
+<script>
+function yes() {
+    document.getElementById("question").classList.add("hidden");
+    document.getElementById("yesBox").classList.remove("hidden");
+}
+
+function no() {
+    document.getElementById("question").classList.add("hidden");
+    document.getElementById("noBox").classList.remove("hidden");
+}
+
+function back() {
+    document.getElementById("yesBox").classList.add("hidden");
+    document.getElementById("noBox").classList.add("hidden");
+    document.getElementById("question").classList.remove("hidden");
+}
+
+/* ❤️ Floating hearts generator */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 18) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
+</script>
+
+</body>
+</html>
